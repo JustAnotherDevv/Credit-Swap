@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@erc7824/nitrolite": "^0.2.6",
+    "chalk": "^5.4.1",
+    "dotenv": "^16.5.0",
+    "ethers": "^6.14.3",
+    "viem": "^2.30.5"
+  }
+}
