@@ -19,6 +19,7 @@ export default function RequestDetail() {
     loanAmount: 150000,
     yieldPreference: 6.5,
     collateralType: "Yield-Based",
+    image: "/properties/1.png",
   };
 
   const mockProposals = [
@@ -42,6 +43,17 @@ export default function RequestDetail() {
             <p className="text-gray-400">
               Review and manage loan request #{id}
             </p>
+            <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+              <img
+                src={mockRequest.image}
+                alt={mockRequest.propertyName}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://placehold.co/600x400/1f2937/ffffff?text=Property+Image";
+                }}
+              />
+            </div>
           </div>
 
           <Separator className="my-4 bg-gray-800" />

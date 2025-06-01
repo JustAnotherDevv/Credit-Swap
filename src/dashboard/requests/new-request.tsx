@@ -21,12 +21,19 @@ export default function RequestNew() {
     loanAmount: "",
     collateralType: "",
     yieldPreference: "",
+    propertyPhoto: null as File | null,
   });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setForm({ ...form, propertyPhoto: e.target.files[0] });
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -73,6 +80,21 @@ export default function RequestNew() {
                       required
                       className="bg-gray-800 border-gray-700 text-gray-100"
                     />
+                  </div>
+                  <div>
+                    <Label htmlFor="propertyPhoto" className="text-gray-100">
+                      Property Photo
+                    </Label>
+                    <Input
+                      name="propertyPhoto"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="bg-gray-800 border-gray-700 text-gray-100 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700"
+                    />
+                    <p className="text-sm text-gray-400 mt-1">
+                      Upload a clear photo of the property (max 5MB)
+                    </p>
                   </div>
                   <div>
                     <Label htmlFor="description" className="text-gray-100">

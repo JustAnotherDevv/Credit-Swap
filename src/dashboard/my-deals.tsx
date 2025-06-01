@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "@/contexts/UserContext";
 
 import { Header } from "@/components/header";
 import { Sidebar } from "@/components/sidebar-proxy";
@@ -40,7 +41,7 @@ const mockDeals = [
 export default function MyDeals() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
-  const userRole = "PB"; // This should come from your auth context/state
+  const { userRole } = useUser();
   const userId = "123"; // This should come from your auth context/state
 
   const getStatusBadge = (status: string) => {
@@ -60,16 +61,16 @@ export default function MyDeals() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100 w-screen">
-      <Header
-        userRole={userRole}
-        onMenuClick={() => setSidebarOpen(!sidebarOpen)}
-      />
-      <div className="flex h-[calc(100vh-4rem)]">
+      <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+
+      <div className="flex">
         <Sidebar
           sidebarOpen={sidebarOpen}
           userRole={userRole}
           userId={userId}
         />
+
+        {/* Main content */}
         <main className="flex-1 overflow-auto">
           <div className="p-6 space-y-6">
             <div className="space-y-2">
@@ -77,61 +78,46 @@ export default function MyDeals() {
                 My Credit Swap Proposals
               </h1>
               <p className="text-gray-400">
-                Track and manage your property proposals.
+                Track and manage your Credit Swap proposals and their status.
               </p>
             </div>
 
-            <Card className="bg-gray-900 border-gray-800">
-              <CardHeader>
-                <CardTitle className="text-gray-100">Active Deals</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b border-gray-800">
-                        <th className="text-left py-3 px-4 text-gray-400">
-                          Property Name
-                        </th>
-                        <th className="text-left py-3 px-4 text-gray-400">
-                          Loan Value
-                        </th>
-                        <th className="text-left py-3 px-4 text-gray-400">
-                          Interest Rate
-                        </th>
-                        <th className="text-left py-3 px-4 text-gray-400">
-                          Status
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {mockDeals.map((deal) => (
-                        <tr
-                          key={deal.id}
-                          className="border-b border-gray-800 hover:bg-gray-800/50 cursor-pointer"
-                          onClick={() =>
-                            navigate(`/dashboard/manage-proxy/${deal.id}`)
-                          }
-                        >
-                          <td className="py-3 px-4 text-gray-100">
-                            {deal.propertyName}
-                          </td>
-                          <td className="py-3 px-4 text-gray-100">
-                            {deal.loanValue}
-                          </td>
-                          <td className="py-3 px-4 text-gray-100">
-                            {deal.interestRate}
-                          </td>
-                          <td className="py-3 px-4">
-                            {getStatusBadge(deal.status)}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="grid gap-6">
+              {mockDeals.map((deal) => (
+                <Card
+                  key={deal.id}
+                  className="bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors cursor-pointer"
+                  onClick={() =>
+                    navigate(`/dashboard/deal-info-proxy/${deal.id}`)
+                  }
+                >
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-gray-100">
+                        {deal.propertyName}
+                      </CardTitle>
+                      {getStatusBadge(deal.status)}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-sm text-gray-400">Loan Value</p>
+                        <p className="text-lg font-semibold text-gray-100">
+                          {deal.loanValue}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">Interest Rate</p>
+                        <p className="text-lg font-semibold text-gray-100">
+                          {deal.interestRate}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </main>
       </div>

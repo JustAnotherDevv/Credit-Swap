@@ -113,6 +113,15 @@ export default function ManagementConsole() {
               </p>
             </div>
 
+            {/* Property Image */}
+            <div className="w-full h-100 relative rounded-lg overflow-hidden">
+              <img
+                src="/properties/4.png"
+                alt={`${propertyName} property image`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
             {/* Action Buttons */}
             <div className="flex gap-4">
               <Button

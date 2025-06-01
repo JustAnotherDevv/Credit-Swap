@@ -111,11 +111,20 @@ export default function ManagementConsoleProxy() {
           <div className="p-6 space-y-6">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold text-gray-100">
-                Payment Timeline for {propertyName}
+                Loan Payment Tracker for {propertyName}
               </h1>
+
               <p className="text-gray-400">
                 Track your loan repayment progress and submit payment evidence.
               </p>
+              {/* Property Image */}
+              <div className="w-full h-100 relative rounded-lg overflow-hidden">
+                <img
+                  src="/properties/4.png"
+                  alt={`${propertyName} property image`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
 
             {/* Timeline */}

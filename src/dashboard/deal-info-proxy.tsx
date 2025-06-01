@@ -20,6 +20,7 @@ export default function DealInfoProxy() {
     loanAmount: 150000,
     yieldPreference: 6.5,
     collateralType: "Yield-Based",
+    image: "/properties/1.png",
   };
 
   return (
@@ -33,11 +34,22 @@ export default function DealInfoProxy() {
         <main className="flex-1 p-6 overflow-y-auto w-full">
           <div className="space-y-2 mb-6">
             <h1 className="text-3xl font-bold text-gray-100">
-              Request Details
+              Credit Swap Request Details
             </h1>
             <p className="text-gray-400">
-              Submit a proposal for a Credit Swap to the request #{id}
+              Review and manage loan request #{id}
             </p>
+            <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+              <img
+                src={mockRequest.image}
+                alt={mockRequest.propertyName}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://placehold.co/600x400/1f2937/ffffff?text=Property+Image";
+                }}
+              />
+            </div>
           </div>
 
           <Separator className="my-4 bg-gray-800" />
@@ -81,10 +93,13 @@ export default function DealInfoProxy() {
           </Card>
 
           {/* Submit Proposal Button */}
-          <div className="flex justify-end">
+          <div className="flex justify-center mt-8">
             <Button
-              className="bg-blue-600 hover:bg-blue-700 text-white"
-              onClick={() => navigate("/dashboard/new-proposal")}
+              size="lg"
+              className="w-full max-w-md py-6 text-lg font-semibold bg-emerald-600 hover:bg-emerald-700"
+              onClick={() => {
+                navigate("/dashboard/new-proposal");
+              }}
             >
               Submit Proposal
             </Button>

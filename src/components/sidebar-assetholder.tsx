@@ -31,17 +31,39 @@ export function Sidebar({ sidebarOpen, userRole, userId }: SidebarProps) {
           </h2>
         </div>
         <nav className="flex-1 space-y-1 p-4">
-          <a
-            href="/dashboard/explore"
-            className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
-          >
-            My Credit Swaps
-          </a>
+          <div className="space-y-1">
+            <a
+              href="/dashboard/my-requests"
+              className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
+            >
+              My Credit Swaps
+            </a>
+            <div className="pl-4 space-y-1">
+              <a
+                href="/dashboard/manage/p1"
+                className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
+              >
+                Manage Ongoing Credit Swap
+              </a>
+              <a
+                href="/dashboard/requests/p1"
+                className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
+              >
+                Manage Pending Credit Swap & Proposals
+              </a>
+              <a
+                href="/dashboard/proofs/p1"
+                className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
+              >
+                View Proof of Loan Repayment
+              </a>
+            </div>
+          </div>
           <a
             href="/dashboard/requests/new"
             className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
           >
-            Create New Request
+            Create CreditSwap Request
           </a>
         </nav>
 

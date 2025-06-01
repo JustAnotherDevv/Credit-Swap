@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { BriefcaseIcon } from "lucide-react";
 import { useState } from "react";
 import { Header } from "@/components/header";
-import { Sidebar } from "@/components/sidebar-proxy";
+import { Sidebar } from "@/components/sidebar-assetholder";
 import { useNavigate } from "react-router-dom";
 
 const mockProposals = [
@@ -76,7 +76,7 @@ const mockProposals = [
   },
 ];
 
-export default function ProposalTracker() {
+export default function MyRequests() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const userRole = "PB"; // This should come from your auth system
   const userId = "123"; // This should come from your auth system
@@ -101,11 +101,10 @@ export default function ProposalTracker() {
           <div className="p-6 space-y-6">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold text-gray-100">
-                Credit Swap Opportunities
+                Credit Swap Requests
               </h1>
               <p className="text-gray-400">
-                Explore opportunities to take loans on behalf of others, and
-                earn interest via Credit Swap agreements.
+                Manage your requests for Credit Swaps and ongoing loans.
               </p>
             </div>
 
@@ -156,7 +155,7 @@ export default function ProposalTracker() {
                     <Button
                       className="w-full mt-2 bg-purple-600 text-white hover:bg-purple-700"
                       onClick={() =>
-                        navigate(`/dashboard/deal-info-proxy/${proposal.id}`)
+                        navigate(`/dashboard/manage/${proposal.id}`)
                       }
                     >
                       View More Info

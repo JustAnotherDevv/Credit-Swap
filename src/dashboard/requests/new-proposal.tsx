@@ -127,7 +127,7 @@ export default function RequestNew() {
                     type="submit"
                     className="w-full bg-purple-600 text-white hover:bg-purple-700"
                   >
-                    Submit Request
+                    Submit Proposal
                   </Button>
                 </form>
               </CardContent>

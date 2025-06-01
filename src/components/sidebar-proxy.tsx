@@ -21,7 +21,7 @@ export function Sidebar({ sidebarOpen, userRole, userId }: SidebarProps) {
         <div className="p-4 border-b border-gray-800">
           <div className="w-full h-32 mb-4 bg-gray-800 rounded-lg flex items-center justify-center">
             <img
-              src="/asset-holder.png"
+              src="/proxy-buyer.png"
               alt="Asset Holder Logo"
               className="w-full h-full object-cover rounded-lg"
             />
@@ -31,18 +31,41 @@ export function Sidebar({ sidebarOpen, userRole, userId }: SidebarProps) {
           </h2>
         </div>
         <nav className="flex-1 space-y-1 p-4">
-          <a
-            href="/dashboard/my-deals"
-            className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
-          >
-            My Credit Swap Proposals
-          </a>
-          <a
-            href="/dashboard/swap-opportunities"
-            className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
-          >
-            View Credit Swap Opportunities
-          </a>
+          <div className="space-y-1">
+            <a
+              href="/dashboard/my-deals"
+              className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
+            >
+              My Credit Swap Proposals
+            </a>
+            <a
+              href="/dashboard/manage-proxy/1"
+              className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors ml-4"
+            >
+              Proposal Details
+            </a>
+          </div>
+
+          <div className="space-y-1">
+            <a
+              href="/dashboard/swap-opportunities"
+              className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
+            >
+              View Credit Swap Opportunities
+            </a>
+            <a
+              href="/dashboard/property-detail-proxy/p1"
+              className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors ml-4"
+            >
+              View Property Details
+            </a>
+            <a
+              href="/dashboard/new-proposal"
+              className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors ml-4"
+            >
+              Submit Proposal
+            </a>
+          </div>
         </nav>
 
         <div className="border-t border-gray-800 p-4">
