@@ -56,7 +56,7 @@ export default function MyDeals() {
     <div className="min-h-screen bg-gray-950 text-gray-100 w-screen">
       <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
 
-      <div className="flex">
+      <div className="flex h-[calc(100vh-4rem)]">
         <Sidebar
           sidebarOpen={sidebarOpen}
           userRole={userRole}
