@@ -54,7 +54,7 @@ export function Sidebar({ sidebarOpen, userRole, userId }: SidebarProps) {
               View Credit Swap Opportunities
             </a>
             <a
-              href="/dashboard/property-detail-proxy/p1"
+              href="/dashboard/deal-info-proxy/p1"
               className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors ml-4"
             >
               View Property Details

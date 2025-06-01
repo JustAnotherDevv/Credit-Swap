@@ -80,9 +80,7 @@ export default function MyDeals() {
                 <Card
                   key={deal.id}
                   className="bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors cursor-pointer"
-                  onClick={() =>
-                    navigate(`/dashboard/deal-info-proxy/${deal.id}`)
-                  }
+                  onClick={() => navigate(`/dashboard/manage-proxy/${deal.id}`)}
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between">
