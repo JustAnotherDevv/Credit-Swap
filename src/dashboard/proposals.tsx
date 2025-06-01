@@ -9,7 +9,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/header";
-import { Sidebar } from "@/components/sidebar";
+import { Sidebar } from "@/components/sidebar-assetholder";
 import { CheckCircle2, Clock, Circle } from "lucide-react";
 
 const mockProposals = [

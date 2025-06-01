@@ -18,24 +18,30 @@ export function Sidebar({ sidebarOpen, userRole, userId }: SidebarProps) {
       } fixed inset-y-0 left-0 z-40 w-64 border-r border-gray-800 bg-gray-950 transition-transform lg:translate-x-0 lg:static lg:inset-0`}
     >
       <div className="flex h-full flex-col">
+        <div className="p-4 border-b border-gray-800">
+          <div className="w-full h-32 mb-4 bg-gray-800 rounded-lg flex items-center justify-center">
+            <img
+              src="/asset-holder.png"
+              alt="Asset Holder Logo"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <h2 className="text-lg font-semibold text-gray-100">
+            Asset Holder Dashboard
+          </h2>
+        </div>
         <nav className="flex-1 space-y-1 p-4">
           <a
             href="/dashboard/explore"
             className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
           >
-            Explore
+            My Credit Swaps
           </a>
           <a
-            href="/dashboard/proposals"
+            href="/dashboard/requests/new"
             className="text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-gray-100 group flex items-center rounded-lg px-3 py-2 transition-colors"
           >
-            Proposals
-          </a>
-          <a
-            href={`/dashboard/manage/${userId}`}
-            className="text-sm font-medium bg-purple-600 text-white group flex items-center rounded-lg px-3 py-2 transition-colors"
-          >
-            Engagement
+            Create New Request
           </a>
         </nav>
 
@@ -52,7 +58,7 @@ export function Sidebar({ sidebarOpen, userRole, userId }: SidebarProps) {
             </Avatar>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-gray-100 truncate">
-                {userRole === "AH" ? "Asset Holder" : "Proxy Buyer"}
+                {userRole === "PB" ? "Asset Holder" : "Proxy Buyer"}
               </p>
               <p className="text-xs text-gray-400 truncate">ID: #{userId}</p>
             </div>

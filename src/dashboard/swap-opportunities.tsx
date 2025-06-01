@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { BriefcaseIcon } from "lucide-react";
 import { useState } from "react";
 import { Header } from "@/components/header";
-import { Sidebar } from "@/components/sidebar";
+import { Sidebar } from "@/components/sidebar-proxy";
+import { useNavigate } from "react-router-dom";
 
 const mockProposals = [
   {
@@ -12,9 +13,10 @@ const mockProposals = [
     property: "Villa Verde",
     rate: 5.9,
     months: 24,
-    status: "Accepted",
+    status: "Open",
     proofSubmitted: 2,
     totalProofs: 6,
+    loanAmount: 250000,
   },
   {
     id: "p2",
@@ -24,6 +26,47 @@ const mockProposals = [
     status: "Pending",
     proofSubmitted: 0,
     totalProofs: 6,
+    loanAmount: 320000,
+  },
+  {
+    id: "p3",
+    property: "Miami Beach Condo",
+    rate: 5.5,
+    months: 48,
+    status: "Open",
+    proofSubmitted: 4,
+    totalProofs: 6,
+    loanAmount: 450000,
+  },
+  {
+    id: "p4",
+    property: "Seattle Townhouse",
+    rate: 6.1,
+    months: 30,
+    status: "Open",
+    proofSubmitted: 1,
+    totalProofs: 6,
+    loanAmount: 380000,
+  },
+  {
+    id: "p5",
+    property: "Denver Loft",
+    rate: 5.7,
+    months: 36,
+    status: "Pending",
+    proofSubmitted: 3,
+    totalProofs: 6,
+    loanAmount: 290000,
+  },
+  {
+    id: "p6",
+    property: "Portland Bungalow",
+    rate: 6.0,
+    months: 24,
+    status: "Open",
+    proofSubmitted: 5,
+    totalProofs: 6,
+    loanAmount: 275000,
   },
 ];
 
@@ -31,6 +74,7 @@ export default function ProposalTracker() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const userRole = "PB"; // This should come from your auth system
   const userId = "123"; // This should come from your auth system
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100 w-screen flex flex-col">
@@ -51,10 +95,11 @@ export default function ProposalTracker() {
           <div className="p-6 space-y-6">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold text-gray-100">
-                Your Proposals
+                Credit Swap Opportunities
               </h1>
               <p className="text-gray-400">
-                Track and manage your property proposals
+                Explore opportunities to take loans on behalf of others, and
+                earn interest via Credit Swap agreements.
               </p>
             </div>
 
@@ -67,7 +112,10 @@ export default function ProposalTracker() {
                       {proposal.property}
                     </div>
                     <p className="text-gray-300">
-                      Offered Rate: {proposal.rate}%
+                      Interest Rate: {proposal.rate}%
+                    </p>
+                    <p className="text-gray-300">
+                      Loan Amount: ${proposal.loanAmount.toLocaleString()}
                     </p>
                     <p className="text-gray-300">
                       Repayment: {proposal.months} months
@@ -76,7 +124,7 @@ export default function ProposalTracker() {
                       Status:{" "}
                       <Badge
                         className={
-                          proposal.status === "Accepted"
+                          proposal.status === "Open"
                             ? "bg-green-500"
                             : "bg-yellow-500"
                         }
@@ -88,8 +136,15 @@ export default function ProposalTracker() {
                       Proofs Submitted: {proposal.proofSubmitted}/
                       {proposal.totalProofs}
                     </p>
-                    <Button className="w-full mt-2 bg-purple-600 text-white hover:bg-purple-700">
-                      View Progress
+                    <Button
+                      className="w-full mt-2 bg-purple-600 text-white hover:bg-purple-700"
+                      onClick={() =>
+                        navigate(
+                          `/dashboard/property-detail-proxy/${proposal.id}`
+                        )
+                      }
+                    >
+                      View More Info
                     </Button>
                   </CardContent>
                 </Card>

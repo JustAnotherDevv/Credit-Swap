@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -19,8 +19,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Header } from "@/components/Header";
-import { Sidebar } from "@/components/sidebar";
+import { Header } from "@/components/header";
+import { Sidebar } from "@/components/sidebar-assetholder";
 
 ChartJS.register(
   CategoryScale,
@@ -41,6 +41,22 @@ export default function ManagementConsole() {
   const [yieldAvailable, setYieldAvailable] = useState(3200);
   const [released, setReleased] = useState(3000);
   const [loanRemaining, setLoanRemaining] = useState(150000 - released);
+  const [propertyName, setPropertyName] = useState("");
+
+  // Mock data - in a real app, this would come from an API call
+  const mockLoans = {
+    p1: "Villa Verde",
+    p2: "Austin Duplex",
+  };
+
+  // Set property name when component mounts
+  useEffect(() => {
+    if (id) {
+      setPropertyName(
+        mockLoans[id as keyof typeof mockLoans] || "Unknown Property"
+      );
+    }
+  }, [id]);
 
   const handleReleaseYield = () => {
     const amount = Math.min(yieldAvailable, loanRemaining);
@@ -90,11 +106,31 @@ export default function ManagementConsole() {
           <div className="p-6 space-y-6">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold text-gray-100">
-                Engagement Console
+                My Credit Swap for {propertyName}
               </h1>
               <p className="text-gray-400">
                 Manage your loan engagement and track progress.
               </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-4">
+              <Button
+                variant="secondary"
+                asChild
+                className="bg-gray-800 text-gray-100 hover:bg-gray-700"
+              >
+                <a href={`/dashboard/requests/${id}`}>
+                  View Credit Swap Request & Proposals
+                </a>
+              </Button>
+              <Button
+                variant="secondary"
+                asChild
+                className="bg-gray-800 text-gray-100 hover:bg-gray-700"
+              >
+                <a href={`/dashboard/proofs/${id}`}>View Proof of Property</a>
+              </Button>
             </div>
 
             {/* Stat Cards */}
@@ -112,13 +148,22 @@ export default function ManagementConsole() {
                   <div className="text-2xl font-bold text-green-500">
                     ${yieldAvailable.toLocaleString()}
                   </div>
+                  {userRole === "AH" && (
+                    <Button
+                      onClick={handleReleaseYield}
+                      disabled={yieldAvailable === 0 || loanRemaining === 0}
+                      className="bg-purple-600 hover:bg-purple-700 mt-4 w-full"
+                    >
+                      Release Yield to Proxy Buyer
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
 
               <Card className="bg-gray-900 border-gray-800">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-gray-100">
-                    Released to PB
+                    Payments Released to Proxy Buyer
                   </CardTitle>
                   <CardDescription className="text-gray-400">
                     Total released amount
@@ -134,7 +179,7 @@ export default function ManagementConsole() {
               <Card className="bg-gray-900 border-gray-800">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-gray-100">
-                    Loan Remaining
+                    Remaining Credit Swap Loan
                   </CardTitle>
                   <CardDescription className="text-gray-400">
                     Outstanding balance
@@ -164,29 +209,6 @@ export default function ManagementConsole() {
                 <Bar data={chartData} options={chartOptions} />
               </CardContent>
             </Card>
-
-            {/* Vault Section */}
-            {userRole === "AH" && (
-              <Card className="bg-gray-900 border-gray-800">
-                <CardHeader>
-                  <CardTitle className="text-gray-100">
-                    Vault & Yield Management
-                  </CardTitle>
-                  <CardDescription className="text-gray-400">
-                    Release yield to proxy buyer
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button
-                    onClick={handleReleaseYield}
-                    disabled={yieldAvailable === 0 || loanRemaining === 0}
-                    className="bg-purple-600 hover:bg-purple-700"
-                  >
-                    Release Yield to Proxy Buyer
-                  </Button>
-                </CardContent>
-              </Card>
-            )}
 
             {/* Proof Timeline Section */}
             <Card className="bg-gray-900 border-gray-800">
@@ -218,24 +240,6 @@ export default function ManagementConsole() {
                 )}
               </CardContent>
             </Card>
-
-            {/* Action Buttons */}
-            <div className="flex gap-4">
-              <Button
-                variant="secondary"
-                asChild
-                className="bg-gray-800 text-gray-100 hover:bg-gray-700"
-              >
-                <a href={`/dashboard/requests/${id}`}>View Full Request</a>
-              </Button>
-              <Button
-                variant="secondary"
-                asChild
-                className="bg-gray-800 text-gray-100 hover:bg-gray-700"
-              >
-                <a href={`/dashboard/proofs/${id}`}>View Proof History</a>
-              </Button>
-            </div>
           </div>
         </main>
       </div>

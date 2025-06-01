@@ -4,17 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import {
-  MenuIcon,
-  CheckCircleIcon,
-  HomeIcon,
-  SearchIcon,
-  ClipboardListIcon,
-  Bell,
-  Search,
-} from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CheckCircleIcon } from "lucide-react";
+import { Header } from "@/components/header";
+import { Sidebar } from "@/components/sidebar-assetholder";
 
 export default function RequestDetail() {
   const { id } = useParams();
@@ -35,84 +27,14 @@ export default function RequestDetail() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 w-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/95 backdrop-blur supports-[backdrop-filter]:bg-gray-950/60">
-        <div className="flex h-16 items-center gap-4 px-4 lg:px-6">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden text-gray-400 hover:text-gray-100 hover:bg-gray-800"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            <MenuIcon className="h-5 w-5" />
-            <span className="sr-only">Toggle sidebar</span>
-          </Button>
+    <div className="min-h-screen w-screen bg-gray-950 text-gray-100 overflow-x-hidden">
+      <Header userRole="PB" onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
 
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-purple-500 to-blue-600" />
-            <span className="text-xl font-bold text-gray-100">Dashboard</span>
-          </div>
-
-          <div className="flex-1 max-w-md mx-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-              <Input
-                placeholder="Search requests..."
-                className="pl-10 bg-gray-800 border-gray-700 text-gray-100 placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-gray-400 hover:text-gray-100 hover:bg-gray-800"
-            >
-              <Bell className="h-5 w-5" />
-              <span className="sr-only">Notifications</span>
-            </Button>
-            <Avatar className="h-8 w-8">
-              <AvatarImage
-                src="/placeholder.svg?height=32&width=32"
-                alt="User"
-              />
-              <AvatarFallback className="bg-gray-700 text-gray-100">
-                PB
-              </AvatarFallback>
-            </Avatar>
-          </div>
-        </div>
-      </header>
-
-      <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-64 bg-gray-900 border-r border-gray-800 p-4 space-y-6 hidden lg:block">
-          <nav className="space-y-2">
-            <a
-              href="/dashboard/explore"
-              className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-gray-100"
-            >
-              <HomeIcon className="h-4 w-4" /> Explore
-            </a>
-            <a
-              href="/dashboard/proposals"
-              className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-gray-100"
-            >
-              <SearchIcon className="h-4 w-4" /> Proposals
-            </a>
-            <a
-              href={`/dashboard/manage/${id}`}
-              className="flex items-center gap-2 text-sm font-medium text-purple-400"
-            >
-              <ClipboardListIcon className="h-4 w-4" /> Engagement
-            </a>
-          </nav>
-        </aside>
+      <div className="flex h-[calc(100vh-4rem)] w-full">
+        <Sidebar sidebarOpen={sidebarOpen} userRole="PB" userId={id || "1"} />
 
         {/* Main Panel */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className="flex-1 p-6 overflow-y-auto w-full">
           <div className="space-y-2 mb-6">
             <h1 className="text-3xl font-bold text-gray-100">
               Request Details
