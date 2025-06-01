@@ -7,28 +7,38 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MenuIcon, Bell, Search, ChevronDown } from "lucide-react";
+import { useUser } from "@/contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
-  userRole: "AH" | "PB";
   onMenuClick?: () => void;
-  onUserChange?: (role: "AH" | "PB") => void;
 }
 
-export function Header({ onMenuClick, userRole, onUserChange }: HeaderProps) {
+export function Header({ onMenuClick }: HeaderProps) {
+  const { userRole, setUserRole } = useUser();
+  const navigate = useNavigate();
+
   const users = {
     AH: {
       name: "Sally Moneybags",
       role: "Asset Holder",
       image: "/users/sally.png",
+      path: "/dashboard/my-requests",
     },
     PB: {
       name: "Yash Goldman",
       role: "Proxy Buyer",
       image: "/users/yash.png",
+      path: "/dashboard/my-deals",
     },
   };
 
   const currentUser = users[userRole];
+
+  const handleUserSwitch = (role: "AH" | "PB") => {
+    setUserRole(role);
+    navigate(users[role].path);
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/95 backdrop-blur supports-[backdrop-filter]:bg-gray-950/60">
@@ -97,8 +107,8 @@ export function Header({ onMenuClick, userRole, onUserChange }: HeaderProps) {
               className="w-56 bg-gray-900 border-gray-800"
             >
               <DropdownMenuItem
-                className="flex items-center gap-2 text-gray-100  cursor-pointer"
-                onClick={() => onUserChange?.("AH")}
+                className="flex items-center gap-2 text-gray-100 cursor-pointer"
+                onClick={() => handleUserSwitch("AH")}
               >
                 <img
                   src="/users/sally.png"
@@ -112,7 +122,7 @@ export function Header({ onMenuClick, userRole, onUserChange }: HeaderProps) {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-2 text-gray-100 hover:bg-gray-800 cursor-pointer"
-                onClick={() => onUserChange?.("PB")}
+                onClick={() => handleUserSwitch("PB")}
               >
                 <img
                   src="/users/yash.png"
