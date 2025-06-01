@@ -1,11 +1,15 @@
-// Layout.js
 import { Outlet } from "react-router";
-import { Modal } from "./Modal";
+import { Modal } from "./Modal.tsx";
 
 export const Layout = () => {
   return (
-    <Modal>
-      <Outlet />
-    </Modal>
+    <div
+      className="min-h-screen"
+      style={{ backgroundColor: "var(--background-dark)" }}
+    >
+      <Modal>
+        <Outlet />
+      </Modal>
+    </div>
   );
 };

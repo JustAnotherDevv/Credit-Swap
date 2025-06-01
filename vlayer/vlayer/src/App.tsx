@@ -10,6 +10,7 @@ import { Chain } from "viem";
 import { ErrorBoundary } from "react-error-boundary";
 import { AppErrorBoundaryComponent } from "./components/layout/ErrorBoundary";
 import { getChainSpecs } from "@vlayer/sdk";
+import "./main.css"; // Import the new CSS file
 
 const queryClient = new QueryClient();
 const appKitProjectId = `0716afdbbb2cc3df69721a879b92ad5b`;
@@ -28,6 +29,7 @@ try {
     rpcUrls: { default: { http: [] } },
   } as unknown as Chain;
 }
+
 const chains: [Chain, ...Chain[]] = [chain];
 const networks = chains;
 
@@ -49,8 +51,12 @@ createAppKit({
     icons: ["https://avatars.githubusercontent.com/u/179229932"],
   },
   themeVariables: {
-    "--w3m-color-mix": "#551fbc",
+    // Update theme variables to match your new color scheme
+    "--w3m-color-mix": "#af4bff",
     "--w3m-color-mix-strength": 40,
+    "--w3m-accent": "#af4bff",
+    "--w3m-background-color": "#040613",
+    "--w3m-foreground-color": "#0f1419",
   },
 });
 

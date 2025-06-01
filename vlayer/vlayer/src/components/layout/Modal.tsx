@@ -32,9 +32,11 @@ export const Modal = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     showModal();
   }, [showModal]);
+
   const { currentStep } = useCurrentStep();
   const [isWelcome, setIsWelcome] = useState(false);
   const [isSuccessStep, setIsSuccessStep] = useState(false);
+
   useEffect(() => {
     setIsWelcome(currentStep?.kind === STEP_KIND.WELCOME);
     setIsSuccessStep(currentStep?.kind === STEP_KIND.SUCCESS);
@@ -42,6 +44,7 @@ export const Modal = ({ children }: { children: React.ReactNode }) => {
 
   const [descClass, setDescClass] = useState("");
   const [description, setDescription] = useState("");
+
   useEffect(() => {
     setDescClass("out");
 
@@ -53,9 +56,9 @@ export const Modal = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <dialog className="modal" ref={modalRef}>
-      <div className="modal-box bg-white rounded-2xl">
+      <div className="modal-box">
         <motion.div
-          className="h-[490px] flex flex-col items-center justify-between"
+          className="h-[490px] flex flex-col items-center justify-between p-6"
           initial={{ opacity: 0, scale: 0.1 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.1 }}
@@ -63,35 +66,51 @@ export const Modal = ({ children }: { children: React.ReactNode }) => {
         >
           {/* Navigation */}
           <Navigation />
+
           {/* Progress Bar */}
           <AnimatePresence>
             {!isWelcome && !isSuccessStep && <ProgressBar />}
           </AnimatePresence>
+
           <ErrorBoundary FallbackComponent={StepErrorBoundaryComponent}>
             {/* Header Icon */}
             <AnimatePresence>
               {currentStep?.headerIcon && (
-                <motion.img
+                <motion.div
                   initial={{ opacity: 0, scale: 0.1 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.1 }}
                   transition={{ ease: "easeOut", duration: 0.3 }}
-                  src={currentStep?.headerIcon}
-                  alt="Success Icon"
-                  className="w-[282px] h-[150px]"
-                />
+                  className="flex justify-center items-center mb-4"
+                >
+                  <img
+                    src={currentStep?.headerIcon}
+                    alt="Step Icon"
+                    className="w-[282px] h-[150px] object-contain"
+                    style={{
+                      filter: "drop-shadow(0 4px 20px rgba(175, 75, 255, 0.3))",
+                    }}
+                  />
+                </motion.div>
               )}
             </AnimatePresence>
-            <div className="flex-col flex gap-4 justify-between h-[284px] mb-2">
+
+            <div className="flex-col flex gap-4 justify-between h-[284px] mb-2 w-full">
               {/* Title */}
               {currentStep?.title && (
                 <h3 className={`header ${descClass}`}>{currentStep?.title}</h3>
               )}
+
               {/* Description */}
-              <p className={`h-[116px] desc ${descClass}`}>{description}</p>
+              <p className={`desc ${descClass}`} style={{ minHeight: "116px" }}>
+                {description}
+              </p>
+
               {/* Content */}
               <modalContext.Provider value={{ showModal, closeModal }}>
-                {children}
+                <div className="flex-1 flex flex-col justify-end">
+                  {children}
+                </div>
               </modalContext.Provider>
             </div>
           </ErrorBoundary>

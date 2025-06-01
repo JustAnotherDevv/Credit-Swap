@@ -1,29 +1,29 @@
-import { useCurrentStep } from "../../hooks/useCurentStep";
+import React from "react";
 import { motion } from "motion/react";
-export const ProgressBar = () => {
-  const { currentStep } = useCurrentStep();
+
+interface ProgressBarProps {
+  progress?: number; // 0-100
+  className?: string;
+}
+
+export const ProgressBar: React.FC<ProgressBarProps> = ({
+  progress = 50,
+  className = "",
+}) => {
   return (
-    <motion.ul
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ ease: "easeOut", duration: 0.3, delay: 0.4 }}
-      className="steps w-full"
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.3 }}
+      className={`progress-bar ${className}`}
     >
-      <li
-        className={`step ${currentStep?.index !== undefined && currentStep?.index >= 1 ? "step-primary" : ""} text-black text-xs`}
-      >
-        Connect Wallet
-      </li>
-      <li
-        className={`step ${currentStep?.index !== undefined && currentStep?.index >= 2 ? "step-primary" : ""} text-black text-xs`}
-      >
-        Get data from X
-      </li>
-      <li
-        className={`step ${currentStep?.index !== undefined && currentStep?.index >= 3 ? "step-primary" : ""} text-black text-xs`}
-      >
-        Mint NFT
-      </li>
-    </motion.ul>
+      <motion.div
+        className="progress-fill"
+        initial={{ width: 0 }}
+        animate={{ width: `${progress}%` }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      />
+    </motion.div>
   );
 };

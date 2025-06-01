@@ -6,6 +6,7 @@ import {
   WelcomeScreen,
   InstallExtension,
 } from "../components";
+import { CreditSwapCard } from "../components/RevolutStep";
 
 export type Step = {
   kind: STEP_KIND;
@@ -31,10 +32,10 @@ export const steps: Step[] = [
     path: "",
     kind: STEP_KIND.WELCOME,
     component: WelcomeScreen,
-    title: "X NFT",
+    title: "Credit Swap",
     description:
-      "Mint an NFT with your X account. Only owner of account can mint NFT for specific handle. This example demonstrates use of Web Proofs.",
-    headerIcon: "/nft-illustration.svg",
+      "Connect your Revolut account to prove KYC status and ability to be a proxy buyer for asset holder.",
+    // headerIcon: "/nft-illustration.svg",
     index: 0,
   },
   {
@@ -42,7 +43,7 @@ export const steps: Step[] = [
     kind: STEP_KIND.CONNECT_WALLET,
     backUrl: "",
     component: ConnectWalletStep,
-    title: "X NFT",
+    title: "Credit Swap",
     description:
       "To proceed to the next step, please connect your wallet now by clicking the button below.",
     index: 1,
@@ -52,9 +53,9 @@ export const steps: Step[] = [
     kind: STEP_KIND.START_PROVING,
     backUrl: "/connect-wallet",
     component: ProveStep,
-    title: "X NFT",
+    title: "Credit Swap",
     description:
-      "Open vlayer browser extension and follow instructions in order to produce the Proof of X account ownership. \n",
+      "Open vlayer browser extension and follow instructions in order to produce the proof from your Revolut account. \n",
     index: 2,
   },
   {
@@ -62,7 +63,7 @@ export const steps: Step[] = [
     kind: STEP_KIND.INSTALL_EXTENSION,
     component: InstallExtension,
     backUrl: "/connect-wallet",
-    title: "X NFT",
+    title: "Credit Swap",
     description: `Install vlayer browser extension to proceed to the next step. \n`,
     index: 2,
   },
@@ -71,8 +72,8 @@ export const steps: Step[] = [
     kind: STEP_KIND.MINT,
     backUrl: "/start-proving",
     component: MintStep,
-    title: "X NFT",
-    description: `You are all set to mint your unique X NFT, a true reflection of your verified identity.`,
+    title: "Credit Swap",
+    description: `You are all set to prove yourself as proxy buuyer.`,
     index: 3,
   },
   {
