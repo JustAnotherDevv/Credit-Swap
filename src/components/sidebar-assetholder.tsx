@@ -71,8 +71,9 @@ export function Sidebar({ sidebarOpen, userRole, userId }: SidebarProps) {
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10">
               <AvatarImage
-                src="/placeholder.svg?height=40&width=40"
+                src="/users/sally.png"
                 alt="User"
+                className="object-cover"
               />
               <AvatarFallback className="bg-gray-700 text-gray-100">
                 {userRole}

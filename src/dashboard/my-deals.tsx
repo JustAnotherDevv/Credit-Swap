@@ -23,13 +23,6 @@ const mockDeals = [
     status: "pending",
   },
   {
-    id: 3,
-    propertyName: "Riverside Complex",
-    loanValue: "€3,750,000",
-    interestRate: "4.8%",
-    status: "rejected",
-  },
-  {
     id: 4,
     propertyName: "Hillside Villas",
     loanValue: "€8,000,000",
