@@ -8,6 +8,10 @@ import {Verifier} from "vlayer-0.1.0/Verifier.sol";
 
 import {ERC721} from "@openzeppelin-contracts-5.0.1/token/ERC721/ERC721.sol";
 
+import {ReentrancyGuard} from "@openzeppelin-contracts-5.0.1/utils/ReentrancyGuard.sol";
+import {Pausable} from "@openzeppelin-contracts-5.0.1/utils/Pausable.sol";
+import {Ownable} from "@openzeppelin-contracts-5.0.1/access/Ownable.sol";
+
 contract WebProofVerifier is Verifier, ERC721 {
     address public prover;
 

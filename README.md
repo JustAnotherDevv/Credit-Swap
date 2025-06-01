@@ -1,5 +1,10 @@
 # Credit Swap
 
+## Depoyments
+
+- Decentralized Credit Swap - Flow - 0x96aBA996237ad88F9c65A8d5dfbfC059D8D4770F
+- Decentralized Credit Swap (VLayer) - Ethereum Sepolia -
+
 ## Smart Contracts
 
 ### View
